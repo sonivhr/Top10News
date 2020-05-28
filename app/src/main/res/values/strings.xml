@@ -8,4 +8,8 @@
     
     <!-- Content description -->
     <string name="content_description_logo">App logo</string>
+
+    <!-- Error messages -->
+    <string name="invalid_email">Use valid email</string>
+
 </resources>
