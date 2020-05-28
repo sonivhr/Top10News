@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MVVMProject</string>
+
+    <string name="change_theme">Change Theme</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_username">Username</string>
+    <string name="login">Login</string>
+    
+    <!-- Content description -->
+    <string name="content_description_logo">App logo</string>
+</resources>
