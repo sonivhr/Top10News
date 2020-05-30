@@ -22,6 +22,8 @@ class StoriesViewModel : ViewModel() {
     val liveDataStoriesDetail = MutableLiveData<List<StoryDetails>>()
     val liveDataStoriesDetailThrowable = MutableLiveData<Throwable>()
 
+    private var isLoadingStories = false
+
     init {
         startLoadingTopStories()
     }
@@ -50,17 +52,26 @@ class StoriesViewModel : ViewModel() {
                 .concatMap { id -> storiesRepository.getStoryDetail(id).toObservable() }
                 .toList()
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe { isLoadingStories = true }
                 .subscribe(
                     { storiesDetails ->
                         noOfLoadedPages += 1
                         liveDataStoriesDetail.postValue(storiesDetails)
+                        isLoadingStories = false
                     },
                     { throwable ->
                         Log.e(TAG, "Got an error while get story details: ${throwable.message}")
                         liveDataStoriesDetailThrowable.postValue(throwable)
+                        isLoadingStories = false
                     }
                 )
         )
+    }
+
+    fun loadNextSetOfStories() {
+        if (!isLoadingStories) {
+            loadStoriesDetail()
+        }
     }
 
     override fun onCleared() {

@@ -12,9 +12,15 @@ import com.mvvmproject.rest.response.StoryDetails
 import com.mvvmproject.util.covertToHumanReadableTime
 
 class StoryViewAdapter(context: Context,
-                       private val stories: List<StoryDetails>,
+                       stories: List<StoryDetails>,
                        private val onItemClickListener: OnItemClickListener):
     RecyclerView.Adapter<StoryViewAdapter.ContentViewHolder>() {
+
+    private val listStories = mutableListOf<StoryDetails>()
+
+    init {
+        listStories.addAll(stories)
+    }
 
     private val inflater = LayoutInflater.from(context)
 
@@ -24,9 +30,15 @@ class StoryViewAdapter(context: Context,
     }
 
     override fun onBindViewHolder(contentViewHolder: ContentViewHolder, position: Int) =
-        contentViewHolder.bindViews(stories[position], position, onItemClickListener)
+        contentViewHolder.bindViews(listStories[position], position, onItemClickListener)
 
-    override fun getItemCount() = stories.size
+    override fun getItemCount() = listStories.size
+
+    fun addStories(newStories: List<StoryDetails>) {
+        val itemCount = itemCount
+        listStories.addAll(newStories)
+        notifyItemInserted(itemCount)
+    }
 
     class ContentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 

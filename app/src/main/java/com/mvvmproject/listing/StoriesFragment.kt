@@ -19,12 +19,13 @@ import kotlinx.android.synthetic.main.layout_listing.*
 const val ARGUMENT_URL = "url"
 class StoriesFragment : Fragment(), OnItemClickListener {
 
+    private val TAG = this.javaClass.simpleName
     private lateinit var storiesViewModel: StoriesViewModel
     private lateinit var rvLayoutManager: RecyclerView.LayoutManager
     private var storyViewAdapter: StoryViewAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         (activity as AppCompatActivity).supportActionBar?.apply {
             show()
             setTitle(R.string.title_top_stories)
@@ -41,6 +42,7 @@ class StoriesFragment : Fragment(), OnItemClickListener {
         rvStoriesList.also {
             it.setHasFixedSize(false)
             it.layoutManager = rvLayoutManager
+            it.addOnScrollListener(rvOnScrollListener)
         }
 
         storiesViewModel = ViewModelProvider(this).get(StoriesViewModel::class.java)
@@ -50,12 +52,14 @@ class StoriesFragment : Fragment(), OnItemClickListener {
     private fun observeStoriesViewModel() {
         storiesViewModel.liveDataStoriesDetail.observe(viewLifecycleOwner, Observer {
             storiesDetails ->
-            if (storyViewAdapter == null) {
-                storyViewAdapter = StoryViewAdapter(requireContext(), storiesDetails, this)
-            }
             rvStoriesList.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
-            rvStoriesList.adapter = storyViewAdapter
+            if (storyViewAdapter == null) {
+                storyViewAdapter = StoryViewAdapter(requireContext(), storiesDetails, this)
+                rvStoriesList.adapter = storyViewAdapter
+            } else {
+                storyViewAdapter?.addStories(storiesDetails)
+            }
         })
     }
 
@@ -65,5 +69,21 @@ class StoriesFragment : Fragment(), OnItemClickListener {
         activity?.replaceFragment(fragmentClass = StoryDetailFragment::class.java,
             args = bundle,
             tag = StoryDetailFragment::class.java.simpleName)
+    }
+
+    private val rvOnScrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val lastVisibleItem =
+                (rvLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+
+            storyViewAdapter?.let {
+                val percentScrolled = (lastVisibleItem * 100) / it.itemCount
+                // If list is scrolled more than 50% load next step of stories
+                if (percentScrolled > 50) {
+                    storiesViewModel.loadNextSetOfStories()
+                }
+            }
+        }
     }
 }
