@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.mvvmproject.R
+import com.mvvmproject.fragmentutil.replaceFragment
+import com.mvvmproject.listing.StoriesFragment
 import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginFragment : Fragment() {
 
-    private val TAG = "LoginFragment"
+    private val TAG = this.javaClass.simpleName
     private var darkTheme = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
@@ -63,8 +64,10 @@ class LoginFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         })
-    }
 
-    private fun CharSequence?.isValidEmail() =
-        !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this!!).matches()
+        btnLogin.setOnClickListener {
+            activity?.replaceFragment(fragmentClass = StoriesFragment::class.java,
+                tag = StoriesFragment::class.java.simpleName)
+        }
+    }
 }

@@ -5,6 +5,10 @@
     <string name="hint_password">Password</string>
     <string name="hint_username">Username</string>
     <string name="login">Login</string>
+
+    <string name="title_top_stories">Top Stories</string>
+    <string name="title_story_detail">Story Detail</string>
+    <string name="text_by">By: </string>
     
     <!-- Content description -->
     <string name="content_description_logo">App logo</string>
