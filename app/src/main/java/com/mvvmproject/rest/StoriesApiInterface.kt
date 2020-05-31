@@ -8,7 +8,7 @@ import retrofit2.http.Path
 interface StoriesApiInterface {
 
     @GET("topstories.json")
-    fun getTopStories(): Single<List<Int>>
+    fun getTopStories(): Single<ArrayList<Int>>
 
     @GET("item/{id}.json")
     fun getStoryDetails(@Path("id") id: Int): Single<StoryDetails>

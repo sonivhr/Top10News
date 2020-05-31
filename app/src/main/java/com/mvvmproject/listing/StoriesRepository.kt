@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 class StoriesRepository {
 
-    fun getTopStories(): Single<List<Int>> =
+    fun getTopStories(): Single<ArrayList<Int>> =
         MVVMApplication.appComponent.storiesApiInterface().getTopStories()
 
     fun getStoryDetail(id: Int) =

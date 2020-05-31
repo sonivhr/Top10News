@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.mvvmproject.R
-import com.mvvmproject.fragmentutil.replaceFragment
+import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.listing.StoriesFragment
 import kotlinx.android.synthetic.main.layout_login.*
 
@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
         })
 
         btnLogin.setOnClickListener {
-            activity?.replaceFragment(fragmentClass = StoriesFragment::class.java,
+            activity?.addFragmentWithBackStack(fragmentClass = StoriesFragment::class.java,
                 tag = StoriesFragment::class.java.simpleName)
         }
     }

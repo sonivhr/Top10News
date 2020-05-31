@@ -16,15 +16,23 @@ class StoriesViewModel : ViewModel() {
     private var noOfLoadedPages = 0
     private val compositeDisposable = CompositeDisposable()
 
-    private lateinit var listTopStories: List<Int>
-    private val liveDataTopStoriesThrowable = MutableLiveData<Throwable>()
+    private lateinit var listTopStories: ArrayList<Int>
+    val liveDataTopStoriesThrowable = MutableLiveData<Throwable>()
 
-    val liveDataStoriesDetail = MutableLiveData<List<StoryDetails>>()
+    val liveDataStoriesDetail = MutableLiveData<MutableList<StoryDetails>>()
     val liveDataStoriesDetailThrowable = MutableLiveData<Throwable>()
 
     private var isLoadingStories = false
 
     init {
+        startLoadingTopStories()
+    }
+
+    fun refreshStories() {
+        if (::listTopStories.isInitialized) {
+            listTopStories.clear()
+        }
+        liveDataStoriesDetail.value?.clear()
         startLoadingTopStories()
     }
 
@@ -34,6 +42,8 @@ class StoriesViewModel : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { topStories ->
+                        // Todo: Test with small number of data, is it causing index out of bound exception
+//                        listTopStories = topStories.subList(0, 40)
                         listTopStories = topStories
                         loadStoriesDetail()
                     },
@@ -46,7 +56,10 @@ class StoriesViewModel : ViewModel() {
 
     private fun loadStoriesDetail() {
         val startIndex = noOfLoadedPages * MAX_STORY_DETAIL
-        val endIndex = startIndex + MAX_STORY_DETAIL
+        var endIndex = startIndex + MAX_STORY_DETAIL
+        if (endIndex >= listTopStories.size) {
+            endIndex = listTopStories.size
+        }
         compositeDisposable.add(
             Observable.fromIterable(listTopStories.subList(startIndex, endIndex))
                 .concatMap { id -> storiesRepository.getStoryDetail(id).toObservable() }
@@ -56,7 +69,7 @@ class StoriesViewModel : ViewModel() {
                 .subscribe(
                     { storiesDetails ->
                         noOfLoadedPages += 1
-                        liveDataStoriesDetail.postValue(storiesDetails)
+                        liveDataStoriesDetail.postValue(storiesDetails.toMutableList())
                         isLoadingStories = false
                     },
                     { throwable ->

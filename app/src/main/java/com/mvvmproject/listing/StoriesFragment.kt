@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvmproject.R
 import com.mvvmproject.detail.StoryDetailFragment
-import com.mvvmproject.fragmentutil.replaceFragment
+import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.rest.response.StoryDetails
+import com.mvvmproject.util.showSnackBar
 import kotlinx.android.synthetic.main.layout_listing.*
 
 const val ARGUMENT_URL = "url"
@@ -47,6 +48,10 @@ class StoriesFragment : Fragment(), OnItemClickListener {
 
         storiesViewModel = ViewModelProvider(this).get(StoriesViewModel::class.java)
         observeStoriesViewModel()
+
+        swipeRefreshStories.setOnRefreshListener {
+            storiesViewModel.refreshStories()
+        }
     }
 
     private fun observeStoriesViewModel() {
@@ -54,19 +59,36 @@ class StoriesFragment : Fragment(), OnItemClickListener {
             storiesDetails ->
             rvStoriesList.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
-            if (storyViewAdapter == null) {
+            if (storyViewAdapter == null || swipeRefreshStories.isRefreshing) {
                 storyViewAdapter = StoryViewAdapter(requireContext(), storiesDetails, this)
                 rvStoriesList.adapter = storyViewAdapter
             } else {
                 storyViewAdapter?.addStories(storiesDetails)
             }
+            stopRefreshingIcon()
+        })
+
+        storiesViewModel.liveDataStoriesDetailThrowable.observe(viewLifecycleOwner, Observer {
+                throwable ->
+            requireActivity().showSnackBar(getString(R.string.message_error_loading_stories_details))
+            stopRefreshingIcon()
+        })
+
+        storiesViewModel.liveDataTopStoriesThrowable.observe(viewLifecycleOwner, Observer {
+                throwable ->
+            requireActivity().showSnackBar(getString(R.string.message_error_loading_top_stories))
+            stopRefreshingIcon()
         })
     }
 
     override fun onItemClick(position: Int, storyDetails: StoryDetails) {
+        if (storyDetails.url == null) {
+            requireActivity().showSnackBar(getString(R.string.message_story_detail_unavailable))
+            return
+        }
         val bundle = Bundle()
         bundle.putString(ARGUMENT_URL, storyDetails.url)
-        activity?.replaceFragment(fragmentClass = StoryDetailFragment::class.java,
+        requireActivity().addFragmentWithBackStack(fragmentClass = StoryDetailFragment::class.java,
             args = bundle,
             tag = StoryDetailFragment::class.java.simpleName)
     }
@@ -78,12 +100,18 @@ class StoriesFragment : Fragment(), OnItemClickListener {
                 (rvLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
             storyViewAdapter?.let {
-                val percentScrolled = (lastVisibleItem * 100) / it.itemCount
-                // If list is scrolled more than 50% load next step of stories
-                if (percentScrolled > 50) {
+                // If user is scrolling the list and only 10 items are remaining in the list then
+                // it's good time to fetch more stories
+                if (it.itemCount - lastVisibleItem <= 10) {
                     storiesViewModel.loadNextSetOfStories()
                 }
             }
+        }
+    }
+
+    private fun stopRefreshingIcon() {
+        if (swipeRefreshStories.isRefreshing) {
+            swipeRefreshStories.isRefreshing = false
         }
     }
 }

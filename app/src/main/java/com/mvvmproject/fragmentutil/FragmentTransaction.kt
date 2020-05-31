@@ -12,10 +12,10 @@ fun FragmentActivity.addFragment(fragmentClass: Class<out Fragment>,
         .commit()
 }
 
-fun FragmentActivity.replaceFragment(fragmentClass: Class<out Fragment>,
-                                     args: Bundle? = null, tag: String? = null) {
+fun FragmentActivity.addFragmentWithBackStack(fragmentClass: Class<out Fragment>,
+                                              args: Bundle? = null, tag: String? = null) {
     this.supportFragmentManager.beginTransaction()
-        .replace(R.id.container, fragmentClass, args, tag)
-        .addToBackStack(null)
+        .add(R.id.container, fragmentClass, args, tag)
+        .addToBackStack(tag)
         .commit()
 }

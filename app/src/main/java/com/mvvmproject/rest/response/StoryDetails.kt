@@ -4,5 +4,5 @@ data class StoryDetails(
     val by: String,
     val time: Long,
     val title: String,
-    val url: String
+    val url: String?
 )
