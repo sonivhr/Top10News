@@ -102,8 +102,8 @@ class StoriesFragment : Fragment(), OnItemClickListener {
             storyViewAdapter?.let {
                 // If user is scrolling the list and only 10 items are remaining in the list then
                 // it's good time to fetch more stories
-                if (it.itemCount - lastVisibleItem <= 10) {
-                    storiesViewModel.loadNextSetOfStories()
+                if (it.itemCount - lastVisibleItem <= 10 && storiesViewModel.loadNextSetOfStories()) {
+                    requireActivity().showSnackBar(getString(R.string.message_loading_more_stories))
                 }
             }
         }

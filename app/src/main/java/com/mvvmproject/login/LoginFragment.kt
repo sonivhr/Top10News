@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.mvvmproject.R
 import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.listing.StoriesFragment
+import com.mvvmproject.util.convertListToCSV
 import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginFragment : Fragment() {
@@ -48,10 +49,14 @@ class LoginFragment : Fragment() {
         }
 
         edtUserName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus && !edtUserName.text.toString().isValidEmail()) {
-                tilUserName.error = getString(R.string.invalid_email)
-            } else {
-                tilUserName.error = null
+            if (!hasFocus) {
+                isValidEmail()
+            }
+        }
+
+        edtPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                isValidPassword()
             }
         }
 
@@ -66,8 +71,34 @@ class LoginFragment : Fragment() {
         })
 
         btnLogin.setOnClickListener {
+            checkValidCredentialsAndOpenStories()
+        }
+    }
+
+    private fun checkValidCredentialsAndOpenStories() {
+        isValidEmail()
+        if (isValidPassword()) {
             activity?.addFragmentWithBackStack(fragmentClass = StoriesFragment::class.java,
                 tag = StoriesFragment::class.java.simpleName)
         }
+    }
+
+    private fun isValidEmail(): Boolean {
+        if (!edtUserName.text.isValidEmail()) {
+            tilUserName.error = getString(R.string.invalid_email)
+            return false
+        }
+        tilUserName.error = null
+        return true
+    }
+
+    private fun isValidPassword(): Boolean {
+        val passwordValidation = edtPassword.text.toString().isValidPassword()
+        if (passwordValidation.first) {
+            edtPassword.error = null
+            return true
+        }
+        edtPassword.error = passwordValidation.second?.convertListToCSV()
+        return false
     }
 }

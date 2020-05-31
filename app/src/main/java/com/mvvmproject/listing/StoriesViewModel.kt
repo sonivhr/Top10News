@@ -81,10 +81,12 @@ class StoriesViewModel : ViewModel() {
         )
     }
 
-    fun loadNextSetOfStories() {
+    fun loadNextSetOfStories(): Boolean {
         if (!isLoadingStories) {
             loadStoriesDetail()
+            return true
         }
+        return false
     }
 
     override fun onCleared() {
