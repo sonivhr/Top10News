@@ -3,7 +3,7 @@ package com.mvvmproject.userpreference
 import android.content.Context
 
 private const val SHARED_PREFERENCE_NAME = "MY_SHAREDPREFERENCES"
-const val PREF_APP_THEME = "APP_THEME"
+const val PREF_IS_DARK_APP_THEME = "IS_DARK_APP_THEME"
 
 class UserPreferenceManager(context: Context) {
 

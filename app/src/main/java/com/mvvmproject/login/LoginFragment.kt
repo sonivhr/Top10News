@@ -3,7 +3,6 @@ package com.mvvmproject.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +12,17 @@ import androidx.fragment.app.Fragment
 import com.mvvmproject.R
 import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.listing.StoriesFragment
+import com.mvvmproject.userpreference.PREF_IS_DARK_APP_THEME
+import com.mvvmproject.userpreference.UserPreferenceManager
 import com.mvvmproject.util.convertListToCSV
 import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginFragment : Fragment() {
 
     private val TAG = this.javaClass.simpleName
+    private val userPreferenceManager: UserPreferenceManager by lazy {
+        UserPreferenceManager(requireContext())
+    }
     private var darkTheme = false
 
     override fun onResume() {
@@ -38,13 +42,12 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         txtChangeTheme.setOnClickListener {
-            Log.e(TAG, "txtChangeTheme clicked")
-            if (darkTheme) {
-                darkTheme = false
+            if (userPreferenceManager.getBoolean(PREF_IS_DARK_APP_THEME)) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                userPreferenceManager.putBoolean(PREF_IS_DARK_APP_THEME, false)
             } else {
-                darkTheme = true
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                userPreferenceManager.putBoolean(PREF_IS_DARK_APP_THEME, true)
             }
         }
 
