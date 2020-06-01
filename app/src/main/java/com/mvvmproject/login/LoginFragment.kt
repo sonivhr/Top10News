@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.listing.StoriesFragment
 import com.mvvmproject.userpreference.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.userpreference.UserPreferenceManager
 import com.mvvmproject.util.convertListToCSV
+import com.mvvmproject.util.showSnackBar
 import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginFragment : Fragment() {
@@ -23,7 +26,7 @@ class LoginFragment : Fragment() {
     private val userPreferenceManager: UserPreferenceManager by lazy {
         UserPreferenceManager(requireContext())
     }
-    private var darkTheme = false
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onResume() {
         super.onResume()
@@ -76,13 +79,26 @@ class LoginFragment : Fragment() {
         btnLogin.setOnClickListener {
             checkValidCredentialsAndOpenStories()
         }
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        loginViewModel.loginResponseLiveData.observe(viewLifecycleOwner, Observer {
+            loginResponse ->
+            if (!loginResponse.token.isNullOrBlank()) {
+                activity?.addFragmentWithBackStack(fragmentClass = StoriesFragment::class.java,
+                    tag = StoriesFragment::class.java.simpleName)
+            } else {
+                requireActivity().showSnackBar(loginResponse.description!!)
+            }
+        })
     }
 
     private fun checkValidCredentialsAndOpenStories() {
         isValidEmail()
         if (isValidPassword()) {
-            activity?.addFragmentWithBackStack(fragmentClass = StoriesFragment::class.java,
-                tag = StoriesFragment::class.java.simpleName)
+            loginViewModel.validateUser(edtUserName.text.toString(), edtPassword.text.toString())
         }
     }
 

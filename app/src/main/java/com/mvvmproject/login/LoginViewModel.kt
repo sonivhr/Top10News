@@ -1,10 +1,16 @@
 package com.mvvmproject.login
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel: ViewModel() {
 
-    init {
+    private val loginRepository = LoginRepository()
 
+    val loginResponseLiveData = MutableLiveData<LoginResponse>()
+
+    fun validateUser(username: String, password: String) {
+        loginResponseLiveData.value = loginRepository.validateUser(username, password)
     }
+
 }

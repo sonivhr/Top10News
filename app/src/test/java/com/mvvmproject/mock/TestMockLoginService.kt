@@ -11,8 +11,8 @@ class TestMockLoginService {
         val loginRequest = LoginRequest("test@worldofplay.in",
         "Worldofplay@2020")
 
-        val mockLoginService = MockLoginService(loginRequest)
-        val loginResponse = mockLoginService.validateUser()
+        val mockLoginService = MockLoginService()
+        val loginResponse = mockLoginService.validateUser(loginRequest)
 
         assertEquals(VALID_CREDENTIAL_TOKEN, loginResponse.token)
         assertEquals(null, loginResponse.error)
@@ -25,8 +25,8 @@ class TestMockLoginService {
         val loginRequest = LoginRequest("test@worldofplay.in",
             "Worldofplay@2019")
 
-        val mockLoginService = MockLoginService(loginRequest)
-        val loginResponse = mockLoginService.validateUser()
+        val mockLoginService = MockLoginService()
+        val loginResponse = mockLoginService.validateUser(loginRequest)
 
         assertEquals(null, loginResponse.token)
         assertEquals(INVALID_CREDENTIALS_RESPONSE_ERROR, loginResponse.error)

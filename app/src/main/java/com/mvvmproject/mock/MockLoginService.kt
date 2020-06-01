@@ -18,9 +18,9 @@ const val BAD_REQUEST_RESPONSE_ERROR = "bad_request"
 const val BAD_REQUEST_RESPONSE_DESCRIPTION = "Network communication error."
 const val BAD_REQUEST_RESPONSE_CODE = 400
 
-class MockLoginService(val loginRequest: LoginRequest) {
+class MockLoginService() {
 
-    fun validateUser(): LoginResponse {
+    fun validateUser(loginRequest: LoginRequest): LoginResponse {
 
         return if (loginRequest.username == VALID_USERNAME &&
                 loginRequest.password == VALID_PASSWORD) {
