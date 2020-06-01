@@ -35,7 +35,7 @@
             app:layout_constraintHorizontal_bias="0.500"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.97"
+            app:layout_constraintVertical_bias="0.98"
             android:textColor="@android:color/holo_red_light" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.90">
+            app:layout_constraintVertical_bias="0.92">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtUserName"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.50"
+            app:layout_constraintVertical_bias="0.65"
             app:passwordToggleEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="16"
@@ -93,14 +93,15 @@
 
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:contentDescription="@string/content_description_logo"
             app:layout_constraintBottom_toTopOf="@+id/tilUserName"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.70" />
+            app:layout_constraintVertical_bias="0.80"
+            android:background="@mipmap/ic_launcher_round"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

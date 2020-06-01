@@ -69,6 +69,7 @@ class StoriesViewModel : ViewModel() {
                 .subscribe(
                     { storiesDetails ->
                         noOfLoadedPages += 1
+                        liveDataStoriesDetail.value?.addAll(storiesDetails)
                         liveDataStoriesDetail.postValue(storiesDetails.toMutableList())
                         isLoadingStories = false
                     },
