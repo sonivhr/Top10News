@@ -28,10 +28,11 @@ fun ArrayList<String>.convertListToCSV(): String {
         return stringBuilder.toString()
     }
     if (this.size == 1) {
-        stringBuilder.append(this[0])
+        stringBuilder.append("Missing: " + this[0])
         return stringBuilder.toString()
     }
-    for (i in 1..this.size) {
+    stringBuilder.append("Missing: " + this[0])
+    for (i in 1..this.size - 1) {
         stringBuilder.append(", ${this[i]}")
     }
     return stringBuilder.toString()

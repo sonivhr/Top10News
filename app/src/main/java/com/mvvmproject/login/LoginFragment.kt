@@ -95,10 +95,10 @@ class LoginFragment : Fragment() {
     private fun isValidPassword(): Boolean {
         val passwordValidation = edtPassword.text.toString().isValidPassword()
         if (passwordValidation.first) {
-            edtPassword.error = null
+            tilPassword.error = null
             return true
         }
-        edtPassword.error = passwordValidation.second?.convertListToCSV()
+        tilPassword.error = passwordValidation.second?.convertListToCSV()
         return false
     }
 }

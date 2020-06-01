@@ -12,4 +12,13 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.layout_main)
         addFragment(fragmentClass = LoginFragment::class.java, tag = LoginFragment::class.java.simpleName)
     }
+
+    override fun onBackPressed() {
+        when (supportFragmentManager.fragments.size) {
+            3 -> supportActionBar?.setTitle(R.string.title_top_stories)
+            2 -> supportActionBar?.hide()
+            else -> supportActionBar?.hide()
+        }
+        super.onBackPressed()
+    }
 }

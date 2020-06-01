@@ -7,9 +7,10 @@ fun CharSequence?.isValidEmail() =
     !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this!!).matches()
 
 fun String.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
+
     val missingCharsArray = ArrayList<String>()
 
-    if (8 > this.length && this.length > 16) {
+    if (this.isBlank() || 8 > this.length || this.length > 16) {
         missingCharsArray.add("Password should be of 8-16 characters")
         return Pair(false, missingCharsArray)
     }
@@ -25,16 +26,16 @@ fun String.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
     }
 
     if (!lowerCase) {
-        missingCharsArray.add("lower case")
+        missingCharsArray.add("a lower case")
     }
     if (!upperCase) {
-        missingCharsArray.add("upper case")
+        missingCharsArray.add("an upper case")
     }
     if (!digits) {
-        missingCharsArray.add("upper case")
+        missingCharsArray.add("a digit")
     }
     if (!specialCharacters) {
-        missingCharsArray.add("special case")
+        missingCharsArray.add("a special case")
     }
     return Pair(false, missingCharsArray)
 }
