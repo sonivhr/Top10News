@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.listing.StoriesFragment
-import com.mvvmproject.userpreference.PREF_IS_DARK_APP_THEME
-import com.mvvmproject.userpreference.UserPreferenceManager
+import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
+import com.mvvmproject.util.UserPreferenceManager
 import com.mvvmproject.util.*
 import kotlinx.android.synthetic.main.layout_login.*
 

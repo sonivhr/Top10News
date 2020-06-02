@@ -1,4 +1,4 @@
-package com.mvvmproject.userpreference
+package com.mvvmproject.util
 
 import android.content.Context
 
