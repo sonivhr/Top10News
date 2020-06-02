@@ -21,6 +21,7 @@ class StoriesViewModel : ViewModel() {
 
     val liveDataStoriesDetail = MutableLiveData<MutableList<StoryDetails>>()
     val liveDataStoriesDetailThrowable = MutableLiveData<Throwable>()
+    private var noOfLoadedItems = 0
 
     private var isLoadingStories = false
 
@@ -33,6 +34,8 @@ class StoriesViewModel : ViewModel() {
             listTopStories.clear()
         }
         liveDataStoriesDetail.value?.clear()
+        noOfLoadedPages = 0
+        noOfLoadedItems = 0
         startLoadingTopStories()
     }
 
@@ -42,8 +45,6 @@ class StoriesViewModel : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { topStories ->
-                        // Todo: Test with small number of data, is it causing index out of bound exception
-//                        listTopStories = topStories.subList(0, 40)
                         listTopStories = topStories
                         loadStoriesDetail()
                     },
@@ -55,11 +56,15 @@ class StoriesViewModel : ViewModel() {
     }
 
     private fun loadStoriesDetail() {
+        if (isAllItemsLoaded()) {
+            return
+        }
         val startIndex = noOfLoadedPages * MAX_STORY_DETAIL
         var endIndex = startIndex + MAX_STORY_DETAIL
         if (endIndex >= listTopStories.size) {
             endIndex = listTopStories.size
         }
+        Log.e(TAG, "startIndex: $startIndex, endIndex: $endIndex")
         compositeDisposable.add(
             Observable.fromIterable(listTopStories.subList(startIndex, endIndex))
                 .concatMap { id -> storiesRepository.getStoryDetail(id).toObservable() }
@@ -69,6 +74,7 @@ class StoriesViewModel : ViewModel() {
                 .subscribe(
                     { storiesDetails ->
                         noOfLoadedPages += 1
+                        noOfLoadedItems += storiesDetails.size
                         liveDataStoriesDetail.value?.addAll(storiesDetails)
                         liveDataStoriesDetail.postValue(storiesDetails.toMutableList())
                         isLoadingStories = false
@@ -83,12 +89,14 @@ class StoriesViewModel : ViewModel() {
     }
 
     fun loadNextSetOfStories(): Boolean {
-        if (!isLoadingStories) {
+        if (!isLoadingStories && !isAllItemsLoaded()) {
             loadStoriesDetail()
             return true
         }
         return false
     }
+
+    private fun isAllItemsLoaded() = noOfLoadedItems == listTopStories.size
 
     override fun onCleared() {
         compositeDisposable.clear()
