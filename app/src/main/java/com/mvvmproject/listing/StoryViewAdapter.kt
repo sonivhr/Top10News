@@ -49,7 +49,7 @@ class StoryViewAdapter(context: Context,
 
         fun bindViews(storyDetails: StoryDetails, position: Int, onItemClickListener: OnItemClickListener) {
             tvTitle.text = storyDetails.title
-            tvTitleBy.append(storyDetails.by)
+            tvTitleBy.append(" ${storyDetails.by}")
             titleTime.text = storyDetails.time.covertToHumanReadableTime()
             cvStory.setOnClickListener {
                 onItemClickListener.onItemClick(position, storyDetails)
