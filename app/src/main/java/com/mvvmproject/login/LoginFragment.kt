@@ -12,12 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
-import com.mvvmproject.fragmentutil.addFragmentWithBackStack
 import com.mvvmproject.listing.StoriesFragment
 import com.mvvmproject.userpreference.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.userpreference.UserPreferenceManager
-import com.mvvmproject.util.convertListToCSV
-import com.mvvmproject.util.showSnackBar
+import com.mvvmproject.util.*
 import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginFragment : Fragment() {

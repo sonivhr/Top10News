@@ -1,4 +1,4 @@
-package com.mvvmproject.login
+package com.mvvmproject.util
 
 import android.util.Patterns
 import java.util.regex.Pattern

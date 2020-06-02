@@ -1,4 +1,4 @@
-package com.mvvmproject.fragmentutil
+package com.mvvmproject.util
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

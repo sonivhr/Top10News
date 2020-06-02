@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvmproject.R
 import com.mvvmproject.detail.StoryDetailFragment
-import com.mvvmproject.fragmentutil.addFragmentWithBackStack
+import com.mvvmproject.util.addFragmentWithBackStack
 import com.mvvmproject.rest.response.StoryDetails
 import com.mvvmproject.util.showSnackBar
 import kotlinx.android.synthetic.main.layout_listing.*
