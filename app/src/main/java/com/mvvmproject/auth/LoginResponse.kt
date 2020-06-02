@@ -1,4 +1,4 @@
-package com.mvvmproject.login
+package com.mvvmproject.auth
 
 class LoginResponse(
     val token: String? = null,

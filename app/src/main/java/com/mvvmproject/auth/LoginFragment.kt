@@ -1,4 +1,4 @@
-package com.mvvmproject.login
+package com.mvvmproject.auth
 
 import android.os.Bundle
 import android.text.Editable

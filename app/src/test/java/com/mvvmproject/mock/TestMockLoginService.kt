@@ -1,6 +1,6 @@
 package com.mvvmproject.mock
 
-import com.mvvmproject.login.LoginRequest
+import com.mvvmproject.auth.LoginRequest
 import org.junit.Assert.*
 import org.junit.Test
 

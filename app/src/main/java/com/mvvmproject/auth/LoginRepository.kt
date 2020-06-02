@@ -1,4 +1,4 @@
-package com.mvvmproject.login
+package com.mvvmproject.auth
 
 import com.mvvmproject.mock.MockLoginService
 

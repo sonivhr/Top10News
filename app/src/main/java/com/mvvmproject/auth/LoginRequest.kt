@@ -1,4 +1,4 @@
-package com.mvvmproject.login
+package com.mvvmproject.auth
 
 class LoginRequest(
     val username: String,

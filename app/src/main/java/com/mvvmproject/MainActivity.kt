@@ -3,7 +3,7 @@ package com.mvvmproject
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mvvmproject.util.addFragment
-import com.mvvmproject.login.LoginFragment
+import com.mvvmproject.auth.LoginFragment
 
 class MainActivity: AppCompatActivity() {
 
