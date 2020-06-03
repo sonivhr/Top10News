@@ -40,23 +40,24 @@ fun ArrayList<String>.convertListToCSV(): String {
     return stringBuilder.toString()
 }
 
-fun CharSequence?.isValidEmail() =
+fun String?.isValidEmail() =
     !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this!!).matches()
 
-fun String.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
+fun String?.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
 
     val missingCharsArray = ArrayList<String>()
+    val password: String = this ?: ""
 
-    if (this.isBlank() || 8 > this.length || this.length > 16) {
+    if (8 > password.length || password.length > 16) {
         missingCharsArray.add("Password should be of 8-16 characters")
         return Pair(false, missingCharsArray)
     }
 
-    val lowerCase = Pattern.compile(".*[a-z].*").matcher(this).matches()
-    val upperCase = Pattern.compile(".*[A-Z].*").matcher(this).matches()
-    val digits = Pattern.compile(".*\\d.*").matcher(this).matches()
+    val lowerCase = Pattern.compile(".*[a-z].*").matcher(password).matches()
+    val upperCase = Pattern.compile(".*[A-Z].*").matcher(password).matches()
+    val digits = Pattern.compile(".*\\d.*").matcher(password).matches()
     val specialCharacters =
-        Pattern.compile(".*[!@#$%^&*()\\-+].*").matcher(this).matches()
+        Pattern.compile(".*[!@#$%^&*()\\-+].*").matcher(password).matches()
 
     if (lowerCase && upperCase && digits && specialCharacters) {
         return Pair(true, null)

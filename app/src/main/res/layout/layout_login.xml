@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="loginViewModel"
+            type="com.mvvmproject.auth.LoginViewModel" />
+        <variable
+            name="loginFragment"
+            type="com.mvvmproject.auth.LoginFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +41,8 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.98"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@android:color/holo_red_light"
+            android:onClick="@{() -> loginFragment.changeTheme()}"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUserName"
@@ -54,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_username"
                 android:lines="1"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={loginViewModel.username}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +76,7 @@
             app:passwordToggleEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="16"
-            app:counterOverflowTextColor="@android:color/holo_red_dark">
+            app:counterOverflowTextColor="@android:color/holo_red_dark" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtPassword"
@@ -78,7 +85,8 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={loginViewModel.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -90,7 +98,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword"
-            app:layout_constraintVertical_bias="0.15" />
+            app:layout_constraintVertical_bias="0.15"
+            android:onClick="@{() -> loginViewModel.validateUser()}"/>
 
         <ImageView
             android:id="@+id/imgLogo"
