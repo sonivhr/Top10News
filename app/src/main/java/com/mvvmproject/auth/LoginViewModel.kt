@@ -1,6 +1,5 @@
 package com.mvvmproject.auth
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mvvmproject.R

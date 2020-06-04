@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         dataBinding.loginViewModel = this.loginViewModel
         dataBinding.loginFragment = this
+        observeViewModel()
         return dataBinding.root
     }
 

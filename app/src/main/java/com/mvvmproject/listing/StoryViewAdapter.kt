@@ -2,17 +2,15 @@ package com.mvvmproject.listing
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvmproject.R
+import com.mvvmproject.databinding.ListItemBinding
 import com.mvvmproject.rest.response.StoryDetails
-import com.mvvmproject.util.covertToHumanReadableTime
 
-class StoryViewAdapter(context: Context,
-                       stories: List<StoryDetails>,
+class StoryViewAdapter(stories: List<StoryDetails>,
                        private val onItemClickListener: OnItemClickListener):
     RecyclerView.Adapter<StoryViewAdapter.ContentViewHolder>() {
 
@@ -22,11 +20,11 @@ class StoryViewAdapter(context: Context,
         listStories.addAll(stories)
     }
 
-    private val inflater = LayoutInflater.from(context)
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ContentViewHolder {
-        val view = inflater.inflate(R.layout.list_item, viewGroup, false)
-        return ContentViewHolder(view)
+        val layoutInflater = LayoutInflater.from(viewGroup.context)
+        val listItemBinding: ListItemBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, false)
+        return ContentViewHolder(listItemBinding)
     }
 
     override fun onBindViewHolder(contentViewHolder: ContentViewHolder, position: Int) =
@@ -40,17 +38,13 @@ class StoryViewAdapter(context: Context,
         notifyItemInserted(itemCount)
     }
 
-    class ContentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ContentViewHolder(private val listItemBinding: ListItemBinding):
+        RecyclerView.ViewHolder(listItemBinding.root) {
 
-        private val cvStory: CardView = itemView.findViewById(R.id.cvStory)
-        private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-        private val tvTitleBy: TextView = itemView.findViewById(R.id.tvTitleBy)
-        private val titleTime: TextView = itemView.findViewById(R.id.titleTime)
+        private val cvStory: CardView = listItemBinding.root.findViewById(R.id.cvStory)
 
         fun bindViews(storyDetails: StoryDetails, position: Int, onItemClickListener: OnItemClickListener) {
-            tvTitle.text = storyDetails.title
-            tvTitleBy.append(" ${storyDetails.by}")
-            titleTime.text = storyDetails.time.covertToHumanReadableTime()
+            listItemBinding.storyDetails = storyDetails
             cvStory.setOnClickListener {
                 onItemClickListener.onItemClick(position, storyDetails)
             }

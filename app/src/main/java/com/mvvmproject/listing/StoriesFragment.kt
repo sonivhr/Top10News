@@ -33,7 +33,8 @@ class StoriesFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.layout_listing, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +61,7 @@ class StoriesFragment : Fragment(), OnItemClickListener {
             rvStoriesList.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
             if (storyViewAdapter == null || swipeRefreshStories.isRefreshing) {
-                storyViewAdapter = StoryViewAdapter(requireContext(), storiesDetails, this)
+                storyViewAdapter = StoryViewAdapter(storiesDetails, this)
                 rvStoriesList.adapter = storyViewAdapter
             } else {
                 storyViewAdapter?.addStories(storiesDetails)
