@@ -10,7 +10,10 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_main)
-        addFragment(fragmentClass = LoginFragment::class.java, tag = LoginFragment::class.java.simpleName)
+        if (supportFragmentManager.findFragmentByTag(LoginFragment::class.java.simpleName) == null) {
+            addFragment(fragmentClass = LoginFragment::class.java,
+                tag = LoginFragment::class.java.simpleName)
+        }
     }
 
     override fun onBackPressed() {
