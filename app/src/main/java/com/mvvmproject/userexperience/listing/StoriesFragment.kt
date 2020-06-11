@@ -22,7 +22,6 @@ class StoriesFragment : Fragment(), OnItemClickListener {
 
     private val TAG = this.javaClass.simpleName
     private lateinit var storiesViewModel: StoriesViewModel
-    private lateinit var rvLayoutManager: RecyclerView.LayoutManager
     private var storyViewAdapter: StoryViewAdapter? = null
 
     override fun onResume() {
@@ -40,10 +39,8 @@ class StoriesFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvLayoutManager = LinearLayoutManager(activity)
         rvStoriesList.also {
             it.setHasFixedSize(false)
-            it.layoutManager = rvLayoutManager
             it.addOnScrollListener(rvOnScrollListener)
         }
 
@@ -98,7 +95,7 @@ class StoriesFragment : Fragment(), OnItemClickListener {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             val lastVisibleItem =
-                (rvLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                (rvStoriesList.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
             storyViewAdapter?.let {
                 // If user is scrolling the list and only 10 items are remaining in the list then
