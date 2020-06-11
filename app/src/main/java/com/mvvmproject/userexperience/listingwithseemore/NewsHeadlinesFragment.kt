@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mvvmproject.R
 
-class StoriesSeeMoreFragment : Fragment() {
+class NewsHeadlinesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
