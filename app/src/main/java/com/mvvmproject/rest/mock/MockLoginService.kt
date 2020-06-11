@@ -3,8 +3,8 @@ package com.mvvmproject.rest.mock
 import com.mvvmproject.userexperience.auth.LoginRequest
 import com.mvvmproject.userexperience.auth.LoginResponse
 
-private const val VALID_USERNAME = "test@worldofplay.in"
-private const val VALID_PASSWORD = "Worldofplay@2020"
+private const val VALID_USERNAME = "myemail@gmail.com"
+private const val VALID_PASSWORD = "Password@2020"
 
 const val VALID_CREDENTIAL_TOKEN = "VwvYXBpXC9"
 const val VALID_RESPONSE_CODE = 200

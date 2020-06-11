@@ -8,8 +8,8 @@ class TestMockLoginService {
 
     @Test
     fun testValidCredentials() {
-        val loginRequest = LoginRequest("test@worldofplay.in",
-        "Worldofplay@2020")
+        val loginRequest = LoginRequest("myemail@gmail.com",
+        "Password@2020")
 
         val mockLoginService = MockLoginService()
         val loginResponse = mockLoginService.validateUser(loginRequest)
@@ -22,8 +22,8 @@ class TestMockLoginService {
 
     @Test
     fun testInvalidCredentials() {
-        val loginRequest = LoginRequest("test@worldofplay.in",
-            "Worldofplay@2019")
+        val loginRequest = LoginRequest("myemail@gmail.com",
+            "Password@2019")
 
         val mockLoginService = MockLoginService()
         val loginResponse = mockLoginService.validateUser(loginRequest)
