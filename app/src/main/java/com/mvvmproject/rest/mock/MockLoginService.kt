@@ -1,7 +1,7 @@
-package com.mvvmproject.mock
+package com.mvvmproject.rest.mock
 
-import com.mvvmproject.auth.LoginRequest
-import com.mvvmproject.auth.LoginResponse
+import com.mvvmproject.userexperience.auth.LoginRequest
+import com.mvvmproject.userexperience.auth.LoginResponse
 
 private const val VALID_USERNAME = "test@worldofplay.in"
 private const val VALID_PASSWORD = "Worldofplay@2020"

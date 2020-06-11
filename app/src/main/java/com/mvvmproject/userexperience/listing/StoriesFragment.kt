@@ -1,4 +1,4 @@
-package com.mvvmproject.listing
+package com.mvvmproject.userexperience.listing
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvmproject.R
-import com.mvvmproject.detail.StoryDetailFragment
+import com.mvvmproject.userexperience.detail.StoryDetailFragment
 import com.mvvmproject.util.addFragmentWithBackStack
 import com.mvvmproject.rest.response.StoryDetails
 import com.mvvmproject.util.showSnackBar

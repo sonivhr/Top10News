@@ -1,4 +1,4 @@
-package com.mvvmproject.auth
+package com.mvvmproject.userexperience.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.databinding.LayoutLoginBinding
-import com.mvvmproject.listing.StoriesFragment
+import com.mvvmproject.userexperience.listing.StoriesFragment
 import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.util.UserPreferenceManager
 import com.mvvmproject.util.*

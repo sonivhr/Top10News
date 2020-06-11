@@ -5,10 +5,10 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.mvvmproject.auth.LoginViewModel" />
+            type="com.mvvmproject.userexperience.auth.LoginViewModel" />
         <variable
             name="loginFragment"
-            type="com.mvvmproject.auth.LoginFragment" />
+            type="com.mvvmproject.userexperience.auth.LoginFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

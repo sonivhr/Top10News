@@ -1,4 +1,4 @@
-package com.mvvmproject.listing
+package com.mvvmproject.userexperience.listing
 
 import com.mvvmproject.MVVMApplication
 import io.reactivex.Single

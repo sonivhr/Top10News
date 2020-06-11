@@ -1,4 +1,4 @@
-package com.mvvmproject.listing
+package com.mvvmproject.userexperience.listing
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
