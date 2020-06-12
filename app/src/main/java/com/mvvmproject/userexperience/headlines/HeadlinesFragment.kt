@@ -44,7 +44,10 @@ class HeadlinesFragment : Fragment(), OnArticleItemClickListener {
         val headlinesAdapter = HeadlinesAdapter(this)
         rvStoriesList.adapter = headlinesAdapter
         headlinesViewModel.articlesLiveData.observe(viewLifecycleOwner, Observer {
-            articlesPagedList -> headlinesAdapter.submitList(articlesPagedList)
+            articlesPagedList ->
+            progressBar.visibility = View.GONE
+            rvStoriesList.visibility = View.VISIBLE
+            headlinesAdapter.submitList(articlesPagedList)
         })
     }
 

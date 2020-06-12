@@ -18,7 +18,7 @@ class HeadlinesDataSource(
             newsApiInterface.getTopHeadlines(page = 1, pageSize = params.requestedLoadSize)
                 .subscribe(
                     { headlinesResponse ->
-                        callback.onResult(headlinesResponse.article, null, 2)
+                        callback.onResult(headlinesResponse.articles, null, 2)
                     },
                     { throwable ->
                     }
@@ -31,7 +31,7 @@ class HeadlinesDataSource(
             newsApiInterface.getTopHeadlines(page = params.key, pageSize = params.requestedLoadSize)
                 .subscribe(
                     { headlinesResponse ->
-                        callback.onResult(headlinesResponse.article, params.key + 1)
+                        callback.onResult(headlinesResponse.articles, params.key + 1)
                     },
                     { throwable ->
                     }

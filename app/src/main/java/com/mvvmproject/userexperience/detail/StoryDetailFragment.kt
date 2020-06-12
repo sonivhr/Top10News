@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -30,6 +31,7 @@ class StoryDetailFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         wvDetail.loadUrl(arguments?.getString(ARGUMENT_URL))
         wvDetail.webChromeClient = MyWebChromeClient(progressBar)
+        wvDetail.webViewClient = WebViewClient()
     }
 
     class MyWebChromeClient(private val progressBar: ProgressBar) : WebChromeClient() {

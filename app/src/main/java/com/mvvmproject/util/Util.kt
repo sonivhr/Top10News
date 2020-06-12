@@ -83,10 +83,8 @@ fun String?.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
 fun String?.formatedAuthorName(): String? = this?.let { "By: $it" }
 
 fun ImageView.loadOriginalImageWithGlide(urlPath: String?) {
-    if (urlPath == null) {
-        return
-    }
     Glide.with(this.context)
-            .load(urlPath)
-            .into(this)
+        .load(urlPath)
+        .error(R.drawable.ic_image_not_available)
+        .into(this)
 }
