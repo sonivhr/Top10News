@@ -2,13 +2,14 @@ package com.mvvmproject
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.mvvmproject.di.DaggerApplicationComponent
 import com.mvvmproject.di.NetworkModule
 import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.util.UserPreferenceManager
 
-class MVVMApplication: Application() {
+class MVVMApplication: MultiDexApplication() {
 
     companion object {
         val appComponent = DaggerApplicationComponent

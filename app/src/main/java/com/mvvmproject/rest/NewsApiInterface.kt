@@ -1,9 +1,12 @@
 package com.mvvmproject.rest
 
+import com.mvvmproject.rest.response.HeadlinesResponse
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val API_KEY = "d34d3b599d3643288bc5ff974d81575c"
+const val PAGE_SIZE = 20
 
 interface NewsApiInterface {
 
@@ -14,5 +17,5 @@ interface NewsApiInterface {
         @Query("pageSize") pageSize: Int,
         @Query("page") page: Int,
         @Query("apiKey") apiKey: String = API_KEY
-    )
+    ) : Single<HeadlinesResponse>
 }

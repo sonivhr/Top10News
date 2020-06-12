@@ -18,7 +18,7 @@ class MainActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         when (supportFragmentManager.fragments.size) {
-            3 -> supportActionBar?.setTitle(R.string.title_top_stories)
+            3 -> supportActionBar?.setTitle(R.string.title_headlines)
             2 -> supportActionBar?.hide()
             else -> supportActionBar?.hide()
         }

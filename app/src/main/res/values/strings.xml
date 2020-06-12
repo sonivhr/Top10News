@@ -6,7 +6,7 @@
     <string name="hint_username">Username</string>
     <string name="login">Login</string>
 
-    <string name="title_top_stories">Top Stories</string>
+    <string name="title_headlines">Headlines</string>
     <string name="title_story_detail">Story Detail</string>
     <string name="text_by">By: </string>
     
@@ -18,5 +18,5 @@
     <string name="message_error_loading_top_stories">Facing issue while loading top stories</string>
     <string name="message_error_loading_stories_details">Facing issue while loading stories details</string>
     <string name="message_loading_more_stories">Loading more stories&#8230;</string>
-    <string name="message_story_detail_unavailable">Story detail is not available</string>
+    <string name="message_article_detail_unavailable">Article detail is not available</string>
 </resources>

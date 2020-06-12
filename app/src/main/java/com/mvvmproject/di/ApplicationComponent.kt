@@ -1,5 +1,6 @@
 package com.mvvmproject.di
 
+import com.mvvmproject.rest.NewsApiInterface
 import com.mvvmproject.rest.StoriesApiInterface
 import dagger.Component
 import javax.inject.Singleton
@@ -10,4 +11,6 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun storiesApiInterface() : StoriesApiInterface
+
+    fun newsApiInterface() : NewsApiInterface
 }

@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.databinding.LayoutLoginBinding
-import com.mvvmproject.userexperience.listing.StoriesFragment
+import com.mvvmproject.userexperience.headlines.HeadlinesFragment
 import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.util.UserPreferenceManager
 import com.mvvmproject.util.*
@@ -59,8 +59,8 @@ class LoginFragment : Fragment() {
         loginViewModel.loginResponseLiveData.observe(viewLifecycleOwner, Observer {
             loginResponse ->
             if (!loginResponse.token.isNullOrBlank()) {
-                activity?.addFragmentWithBackStack(fragmentClass = StoriesFragment::class.java,
-                    tag = StoriesFragment::class.java.simpleName)
+                activity?.addFragmentWithBackStack(fragmentClass = HeadlinesFragment::class.java,
+                    tag = HeadlinesFragment::class.java.simpleName)
             } else {
                 requireActivity().showSnackBar(loginResponse.description!!)
             }

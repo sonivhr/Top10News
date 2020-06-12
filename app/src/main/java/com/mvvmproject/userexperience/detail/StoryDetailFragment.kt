@@ -10,7 +10,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mvvmproject.R
-import com.mvvmproject.userexperience.listing.ARGUMENT_URL
+import com.mvvmproject.util.ARGUMENT_URL
 import kotlinx.android.synthetic.main.layout_detail.*
 
 class StoryDetailFragment: Fragment() {

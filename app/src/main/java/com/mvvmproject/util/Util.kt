@@ -2,6 +2,8 @@ package com.mvvmproject.util
 
 import android.app.Activity
 import android.util.Patterns
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.mvvmproject.R
 import java.lang.StringBuilder
@@ -79,3 +81,12 @@ fun String?.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
 }
 
 fun String?.formatedAuthorName(): String? = this?.let { "By: $it" }
+
+fun ImageView.loadOriginalImageWithGlide(urlPath: String?) {
+    if (urlPath == null) {
+        return
+    }
+    Glide.with(this.context)
+            .load(urlPath)
+            .into(this)
+}

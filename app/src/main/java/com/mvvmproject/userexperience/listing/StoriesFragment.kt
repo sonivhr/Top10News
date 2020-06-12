@@ -14,10 +14,10 @@ import com.mvvmproject.R
 import com.mvvmproject.userexperience.detail.StoryDetailFragment
 import com.mvvmproject.util.addFragmentWithBackStack
 import com.mvvmproject.rest.response.StoryDetails
+import com.mvvmproject.util.ARGUMENT_URL
 import com.mvvmproject.util.showSnackBar
 import kotlinx.android.synthetic.main.layout_listing.*
 
-const val ARGUMENT_URL = "url"
 class StoriesFragment : Fragment(), OnItemClickListener {
 
     private val TAG = this.javaClass.simpleName
@@ -28,7 +28,7 @@ class StoriesFragment : Fragment(), OnItemClickListener {
         super.onResume()
         (activity as AppCompatActivity).supportActionBar?.apply {
             show()
-            setTitle(R.string.title_top_stories)
+            setTitle(R.string.title_headlines)
         }
     }
 
@@ -81,7 +81,7 @@ class StoriesFragment : Fragment(), OnItemClickListener {
 
     override fun onItemClick(position: Int, storyDetails: StoryDetails) {
         if (storyDetails.url == null) {
-            requireActivity().showSnackBar(getString(R.string.message_story_detail_unavailable))
+            requireActivity().showSnackBar(getString(R.string.message_article_detail_unavailable))
             return
         }
         val bundle = Bundle()
