@@ -1,29 +1,17 @@
 package com.mvvmproject.util
 
-import android.app.Activity
 import android.util.Patterns
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
-import com.mvvmproject.R
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
-
 fun Long.covertToHumanReadableTime(): String {
     val timeFormat = "d MMM yyyy, hh:mm aaa"
     val date = Date(this * 1000)
     val format = SimpleDateFormat(timeFormat, Locale.getDefault())
     return format.format(date)
-}
-
-fun Activity.showSnackBar(message: String) {
-    val snackbar = Snackbar.make(this.findViewById(R.id.mainScreenCoordinatorLayout),
-        message, Snackbar.LENGTH_LONG)
-    snackbar.show()
 }
 
 fun ArrayList<String>.convertListToCSV(): String {
@@ -81,10 +69,3 @@ fun String?.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
 }
 
 fun String?.formatedAuthorName(): String? = this?.let { "By: $it" }
-
-fun ImageView.loadOriginalImageWithGlide(urlPath: String?) {
-    Glide.with(this.context)
-        .load(urlPath)
-        .error(R.drawable.ic_image_not_available)
-        .into(this)
-}

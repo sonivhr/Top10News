@@ -1,16 +1,35 @@
 package com.mvvmproject.di
 
-import com.mvvmproject.rest.NewsApiInterface
-import com.mvvmproject.rest.StoriesApiInterface
+import android.content.Context
+import com.mvvmproject.MVVMApplication
+import com.mvvmproject.userexperience.auth.LoginFragment
+import com.mvvmproject.userexperience.headlines.HeadlinesFragment
+import com.mvvmproject.userexperience.headlines.HeadlinesViewModel
+import com.mvvmproject.userexperience.headlines.di.HeadlinesModule
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 // Definition of the Application graph
 @Singleton
-@Component(modules = [NetworkModule::class])
+@Component(modules = [NetworkModule::class,
+    UserPrefModule::class,
+    HeadlinesModule::class])
 interface ApplicationComponent {
 
-    fun storiesApiInterface() : StoriesApiInterface
+    // region for screen/userinterface injection
+    fun inject(mvvmApplication: MVVMApplication)
 
-    fun newsApiInterface() : NewsApiInterface
+    fun inject(loginFragment: LoginFragment)
+
+    fun inject(headlinesFragment: HeadlinesFragment)
+    // endregion
+
+    // region ViewModels
+    // endregion
+
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context) : ApplicationComponent
+    }
 }

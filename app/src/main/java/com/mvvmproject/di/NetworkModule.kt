@@ -5,6 +5,7 @@ import com.mvvmproject.rest.NewsApiInterface
 import com.mvvmproject.rest.StoriesApiInterface
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,13 +17,15 @@ private const val HTTP_TIME_OUT = 15
 private const val BASE_URL = "https://hacker-news.firebaseio.com/v0/"
 private const val NEWS_API_BASE_URL = "https://newsapi.org/v2/"
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
+    @JvmStatic
     fun stethoInterceptor() = StethoInterceptor()
 
     @Singleton
     @Provides
+    @JvmStatic
     fun provideHTTPClient(stethoInterceptor: StethoInterceptor) = OkHttpClient.Builder()
             .addNetworkInterceptor(stethoInterceptor)
             .connectTimeout(HTTP_TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -30,6 +33,8 @@ class NetworkModule {
             .build()
 
     @Provides
+    @Reusable
+    @JvmStatic
     fun provideRetrofitObject(httpClient: OkHttpClient) : Retrofit {
         return Retrofit.Builder()
             .baseUrl(NEWS_API_BASE_URL)
@@ -40,8 +45,12 @@ class NetworkModule {
     }
 
     @Provides
+    @Reusable
+    @JvmStatic
     fun provideStoriesApiClient(retrofit: Retrofit)= retrofit.create(StoriesApiInterface::class.java)
 
     @Provides
+    @Reusable
+    @JvmStatic
     fun provideNewsApiClient(retrofit: Retrofit)= retrofit.create(NewsApiInterface::class.java)
 }

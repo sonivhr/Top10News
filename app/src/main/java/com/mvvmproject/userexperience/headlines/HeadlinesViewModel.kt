@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.mvvmproject.rest.responseobjects.Article
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class HeadlinesViewModel : ViewModel() {
+class HeadlinesViewModel @Inject constructor(
+    private val compositeDisposable: CompositeDisposable?,
+    private val headlinesUseCase: HeadlinesUseCase) : ViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-    private val headlinesRepo = HeadlinesRepo(compositeDisposable)
-    val articlesLiveData : LiveData<PagedList<Article>>
+    val articlesLiveData : LiveData<PagedList<Article>> = headlinesUseCase.headlinesPagedListLiveData
 
-    init {
-        articlesLiveData = headlinesRepo.headlinesPagedListLiveData
+    override fun onCleared() {
+        compositeDisposable?.clear()
+        super.onCleared()
     }
 }

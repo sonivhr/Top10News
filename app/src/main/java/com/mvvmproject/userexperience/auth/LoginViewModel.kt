@@ -10,9 +10,9 @@ import com.mvvmproject.util.isValidPassword
 class LoginViewModel: ViewModel() {
 
     private val TAG = this.javaClass.simpleName
-    var username: String? = null
+    var username: String? = "myemail@gmail.com"
     val usernameErrorLiveData = MutableLiveData<Int?>()
-    var password: String? = null
+    var password: String? = "Password@2020"
     val passwordErrorLiveData = MutableLiveData<String?>()
 
     private val loginRepository = LoginRepository()

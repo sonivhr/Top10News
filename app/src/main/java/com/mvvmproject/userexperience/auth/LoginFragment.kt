@@ -17,13 +17,19 @@ import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
 import com.mvvmproject.util.UserPreferenceManager
 import com.mvvmproject.util.*
 import kotlinx.android.synthetic.main.layout_login.*
+import javax.inject.Inject
 
 class LoginFragment : Fragment() {
 
-    private val userPreferenceManager: UserPreferenceManager by lazy {
-        UserPreferenceManager(requireContext())
-    }
+    @Inject
+    lateinit var userPreferenceManager: UserPreferenceManager
+
     private lateinit var loginViewModel: LoginViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        appComponent().inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onResume() {
         super.onResume()

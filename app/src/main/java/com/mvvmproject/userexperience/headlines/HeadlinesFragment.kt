@@ -7,19 +7,26 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.rest.responseobjects.Article
 import com.mvvmproject.userexperience.detail.StoryDetailFragment
 import com.mvvmproject.userexperience.listeners.OnArticleItemClickListener
-import com.mvvmproject.util.ARGUMENT_URL
-import com.mvvmproject.util.addFragmentWithBackStack
-import com.mvvmproject.util.showSnackBar
+import com.mvvmproject.util.*
+import dagger.Lazy
 import kotlinx.android.synthetic.main.layout_listing.*
+import javax.inject.Inject
 
 class HeadlinesFragment : Fragment(), OnArticleItemClickListener {
 
+    @Inject
+    lateinit var headlinesViewModelCreator: Lazy<HeadlinesViewModel>
     private lateinit var headlinesViewModel: HeadlinesViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        appComponent().inject(this)
+        super.onCreate(savedInstanceState)
+        headlinesViewModel = getViewModel(headlinesViewModelCreator)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -35,8 +42,6 @@ class HeadlinesFragment : Fragment(), OnArticleItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        headlinesViewModel = ViewModelProvider(this).get(HeadlinesViewModel::class.java)
         startDataLoading()
     }
 

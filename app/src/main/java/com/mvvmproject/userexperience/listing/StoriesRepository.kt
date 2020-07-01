@@ -1,13 +1,15 @@
 package com.mvvmproject.userexperience.listing
 
-import com.mvvmproject.MVVMApplication
+import com.mvvmproject.rest.StoriesApiInterface
 import io.reactivex.Single
+import javax.inject.Inject
 
 class StoriesRepository {
 
-    fun getTopStories(): Single<ArrayList<Int>> =
-        MVVMApplication.appComponent.storiesApiInterface().getTopStories()
+    @Inject
+    lateinit var storiesApiInterface: StoriesApiInterface
 
-    fun getStoryDetail(id: Int) =
-        MVVMApplication.appComponent.storiesApiInterface().getStoryDetails(id)
+    fun getTopStories(): Single<ArrayList<Int>> = storiesApiInterface.getTopStories()
+
+    fun getStoryDetail(id: Int) = storiesApiInterface.getStoryDetails(id)
 }
