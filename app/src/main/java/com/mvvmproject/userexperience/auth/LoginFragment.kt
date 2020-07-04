@@ -62,13 +62,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        loginViewModel.loginResponseLiveData.observe(viewLifecycleOwner, Observer {
-            loginResponse ->
-            if (!loginResponse.token.isNullOrBlank()) {
-                activity?.addFragmentWithBackStack(fragmentClass = HeadlinesFragment::class.java,
-                    tag = HeadlinesFragment::class.java.simpleName)
-            } else {
-                requireActivity().showSnackBar(loginResponse.description!!)
+        loginViewModel.loginResponseEventLiveData.observe(viewLifecycleOwner, Observer {
+            loginResponseEvent ->
+            loginResponseEvent.getContentIfNotHandled()?.let {
+                loginResponse ->
+                if (!loginResponse.token.isNullOrBlank()) {
+                    activity?.replaceFragmentWithBackStack(fragmentClass = HeadlinesFragment::class.java,
+                        tag = HeadlinesFragment::class.java.simpleName)
+                } else {
+                    requireActivity().showSnackBar(loginResponse.description!!)
+                }
             }
         })
 

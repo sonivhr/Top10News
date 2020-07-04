@@ -18,6 +18,14 @@ fun FragmentActivity.addFragmentWithBackStack(fragmentClass: Class<out Fragment>
                                               args: Bundle? = null, tag: String? = null) {
     this.supportFragmentManager.beginTransaction()
         .add(R.id.container, fragmentClass, args, tag)
-        .addToBackStack(tag)
+        .addToBackStack(null)
+        .commit()
+}
+
+fun FragmentActivity.replaceFragmentWithBackStack(fragmentClass: Class<out Fragment>,
+                                              args: Bundle? = null, tag: String? = null) {
+    this.supportFragmentManager.beginTransaction()
+        .replace(R.id.container, fragmentClass, args, tag)
+        .addToBackStack(null)
         .commit()
 }
