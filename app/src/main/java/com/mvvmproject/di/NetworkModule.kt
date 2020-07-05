@@ -1,6 +1,8 @@
 package com.mvvmproject.di
 
+import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.mvvmproject.helperclasses.NetworkConnectivityInterceptor
 import com.mvvmproject.rest.NewsApiInterface
 import com.mvvmproject.rest.StoriesApiInterface
 import dagger.Module
@@ -26,8 +28,10 @@ object NetworkModule {
     @Singleton
     @Provides
     @JvmStatic
-    fun provideHTTPClient(stethoInterceptor: StethoInterceptor) = OkHttpClient.Builder()
+    fun provideHTTPClient(stethoInterceptor: StethoInterceptor, context: Context) =
+        OkHttpClient.Builder()
             .addNetworkInterceptor(stethoInterceptor)
+            .addInterceptor(NetworkConnectivityInterceptor(context))
             .connectTimeout(HTTP_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(HTTP_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .build()

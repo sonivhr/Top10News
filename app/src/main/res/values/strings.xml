@@ -19,4 +19,6 @@
     <string name="message_error_loading_stories_details">Facing issue while loading stories details</string>
     <string name="message_loading_more_stories">Loading more stories&#8230;</string>
     <string name="message_article_detail_unavailable">Article detail is not available</string>
+    <string name="message_no_connectivity">Please check internet connectivity. Tap to retry.</string>
+    <string name="message_issue_while_loading_data">Got an issue while loading data. Tap to retry.</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.mvvmproject.util
+package com.mvvmproject.helperclasses
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -5,8 +5,8 @@ import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.mvvmproject.di.ApplicationComponent
 import com.mvvmproject.di.DaggerApplicationComponent
-import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
-import com.mvvmproject.util.UserPreferenceManager
+import com.mvvmproject.helperclasses.PREF_IS_DARK_APP_THEME
+import com.mvvmproject.helperclasses.UserPreferenceManager
 import javax.inject.Inject
 
 class MVVMApplication: MultiDexApplication() {

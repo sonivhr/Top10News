@@ -1,6 +1,8 @@
 package com.mvvmproject.util
 
 import android.app.Activity
+import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -19,4 +21,10 @@ fun Activity.showSnackBar(message: String) {
         message, Snackbar.LENGTH_LONG
     )
     snackbar.show()
+}
+
+fun Context.isInternetConnected(): Boolean {
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val netInfo = connectivityManager.activeNetworkInfo
+    return netInfo != null && netInfo.isConnectedOrConnecting
 }

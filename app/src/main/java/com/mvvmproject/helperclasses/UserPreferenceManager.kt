@@ -1,4 +1,4 @@
-package com.mvvmproject.util
+package com.mvvmproject.helperclasses
 
 import android.content.Context
 

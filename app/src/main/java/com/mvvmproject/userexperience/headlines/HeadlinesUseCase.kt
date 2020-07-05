@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import com.mvvmproject.rest.PAGE_SIZE
 
 class HeadlinesUseCase(
-    private val headlinesDataSourceFactory: HeadlinesDataSourceFactory
+    val headlinesDataSourceFactory: HeadlinesDataSourceFactory
 ) {
 
     private val headlinesPagedListConfig = PagedList.Config.Builder()

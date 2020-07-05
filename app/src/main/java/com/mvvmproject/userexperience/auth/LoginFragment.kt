@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.mvvmproject.R
 import com.mvvmproject.databinding.LayoutLoginBinding
 import com.mvvmproject.userexperience.headlines.HeadlinesFragment
-import com.mvvmproject.util.PREF_IS_DARK_APP_THEME
-import com.mvvmproject.util.UserPreferenceManager
+import com.mvvmproject.helperclasses.PREF_IS_DARK_APP_THEME
+import com.mvvmproject.helperclasses.UserPreferenceManager
 import com.mvvmproject.util.*
 import kotlinx.android.synthetic.main.layout_login.*
 import javax.inject.Inject

@@ -6,7 +6,7 @@ import com.mvvmproject.rest.responseobjects.Article
 import io.reactivex.disposables.CompositeDisposable
 
 class HeadlinesDataSourceFactory(
-    private val headlinesPagedDataSource: HeadlinesPagedDataSource
+    val headlinesPagedDataSource: HeadlinesPagedDataSource
 ) : DataSource.Factory<Int, Article>() {
 
     val headlinesDataSourceLiveData = MutableLiveData<HeadlinesPagedDataSource>()

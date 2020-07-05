@@ -3,7 +3,7 @@ package com.mvvmproject.userexperience.auth
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mvvmproject.R
-import com.mvvmproject.util.Event
+import com.mvvmproject.helperclasses.Event
 import com.mvvmproject.util.convertListToCSV
 import com.mvvmproject.util.isValidEmail
 import com.mvvmproject.util.isValidPassword
@@ -22,7 +22,13 @@ class LoginViewModel: ViewModel() {
 
     fun validateUser() {
         if (isValidEmail() && isValidPassword()) {
-            loginResponseEventLiveData.value = Event(loginRepository.validateUser(username!!, password!!))
+            loginResponseEventLiveData.value =
+                Event(
+                    loginRepository.validateUser(
+                        username!!,
+                        password!!
+                    )
+                )
         }
     }
 
