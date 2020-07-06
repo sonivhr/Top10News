@@ -52,7 +52,7 @@ class HeadlinesFragment : Fragment(R.layout.layout_listing), OnArticleItemClickL
     }
 
     private fun observeHeadlinesData() {
-        val headlinesAdapter = HeadlinesAdapter(this)
+        val headlinesAdapter = HeadlinesAdapter(this) { headlinesViewModel.retry() }
         rvStoriesList.adapter = headlinesAdapter
         headlinesViewModel.articlesLiveData.observe(viewLifecycleOwner, Observer {
             articlesPagedList ->
@@ -67,6 +67,7 @@ class HeadlinesFragment : Fragment(R.layout.layout_listing), OnArticleItemClickL
             progressBar.visibility = if (dataLoadingState is DataLoadingState.Loading
                 && headlinesViewModel.isHeadlinesListEmpty()) VISIBLE else GONE
             handleNoResultText(dataLoadingState)
+            (rvStoriesList.adapter as HeadlinesAdapter).setDataLoadingState(dataLoadingState)
         })
     }
 
