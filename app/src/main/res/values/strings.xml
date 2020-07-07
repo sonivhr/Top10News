@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">News</string>
+    <string name="app_name">Top10News</string>
 
     <string name="change_theme">Change Theme</string>
     <string name="hint_password">Password</string>
