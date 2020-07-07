@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "41490408806",
+    "firebase_url": "https://top10news-d0cbb.firebaseio.com",
+    "project_id": "top10news-d0cbb",
+    "storage_bucket": "top10news-d0cbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41490408806:android:a96f23ca4a9f15ae0294a7",
+        "android_client_info": {
+          "package_name": "com.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41490408806-qgbt5h9trqebmi2f99mgcuf5hr4rim25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE24kmwgwURCrNQ4ETIyB3-yfHQpIWYEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41490408806-qgbt5h9trqebmi2f99mgcuf5hr4rim25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,2 +1,2 @@
-rootProject.name='MVVMProject'
+rootProject.name='Top10News'
 include ':app'
