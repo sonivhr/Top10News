@@ -3,9 +3,11 @@
     <dimen name="text_size_title">14sp</dimen>
     <dimen name="text_size_subtitle">12sp</dimen>
 
-
     <dimen name="margin_very_small">2dp</dimen>
     <dimen name="margin_small">5dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">12dp</dimen>
+
+    <dimen name="list_footer_left_padding">10dp</dimen>
+    <dimen name="list_footer_top_padding">20dp</dimen>
 </resources>

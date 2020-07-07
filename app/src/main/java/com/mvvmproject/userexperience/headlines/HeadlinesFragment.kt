@@ -56,7 +56,7 @@ class HeadlinesFragment : Fragment(R.layout.layout_listing), OnArticleItemClickL
         rvStoriesList.adapter = headlinesAdapter
         headlinesViewModel.articlesLiveData.observe(viewLifecycleOwner, Observer {
             articlesPagedList ->
-            rvStoriesList.visibility = View.VISIBLE
+            rvStoriesList.visibility = VISIBLE
             headlinesAdapter.submitList(articlesPagedList)
         })
     }

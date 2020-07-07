@@ -47,7 +47,7 @@ class HeadlinesAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position < itemCount) VIEW_TYPE_DATA else VIEW_TYPE_FOOTER
+        return if (position < super.getItemCount()) VIEW_TYPE_DATA else VIEW_TYPE_FOOTER
     }
 
     override fun getItemCount(): Int {
@@ -55,13 +55,13 @@ class HeadlinesAdapter(
     }
 
     private fun hasFooterView(): Boolean {
-        return itemCount != 0 &&
+        return super.getItemCount() != 0 &&
                 (dataLoadingState is DataLoadingState.Loading || dataLoadingState is DataLoadingState.Error)
     }
 
     fun setDataLoadingState(dataLoadingState: DataLoadingState) {
         this.dataLoadingState = dataLoadingState
-        notifyItemChanged(itemCount)
+        notifyItemChanged(super.getItemCount())
     }
 
     companion object {
