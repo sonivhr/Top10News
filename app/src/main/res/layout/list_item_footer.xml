@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.mvvmproject.helperclasses.DataLoadingState"/>
+        <import type="com.newsapp.helperclasses.DataLoadingState"/>
         <import type="android.view.View"/>
         <variable
             name="dataLoadingState"
-            type="com.mvvmproject.helperclasses.DataLoadingState" />
+            type="com.newsapp.helperclasses.DataLoadingState" />
     </data>
 
     <RelativeLayout

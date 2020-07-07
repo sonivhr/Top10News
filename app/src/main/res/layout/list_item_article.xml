@@ -6,7 +6,7 @@
     <data>
         <variable
             name="article"
-            type="com.mvvmproject.rest.responseobjects.Article" />
+            type="com.newsapp.rest.responseobjects.Article" />
     </data>
 
     <androidx.cardview.widget.CardView

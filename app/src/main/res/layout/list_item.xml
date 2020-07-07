@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.mvvmproject.util.UtilKt" />
+        <import type="com.newsapp.util.UtilKt" />
         <variable
             name="storyDetails"
-            type="com.mvvmproject.rest.response.StoryDetails" />
+            type="com.newsapp.rest.response.StoryDetails" />
     </data>
 
     <androidx.cardview.widget.CardView
