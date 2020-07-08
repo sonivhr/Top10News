@@ -1,9 +1,11 @@
 package com.newsapp.userexperience.auth.register
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,12 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.newsapp.R
 import com.newsapp.databinding.LayoutUserRegistrationBinding
 import com.newsapp.userexperience.headlines.HeadlinesFragment
-import com.newsapp.util.appComponent
-import com.newsapp.util.clearBackStackAndAddFragment
-import com.newsapp.util.getFragmentViewModel
-import com.newsapp.util.showSnackBar
+import com.newsapp.util.*
 import dagger.Lazy
-import kotlinx.android.synthetic.main.layout_login.*
 import kotlinx.android.synthetic.main.layout_login.tilPassword
 import kotlinx.android.synthetic.main.layout_user_registration.*
 import javax.inject.Inject
@@ -52,6 +50,15 @@ class UserRegistrationFragment: Fragment() {
         dataBinding.userRegistrationViewModel = this.userRegistrationViewModel
         observeViewModel()
         return dataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+        edtConfirmPassword.onDoneButtonClick(inputMethodManager) {
+            userRegistrationViewModel.registerAndLogin()
+        }
     }
 
     private fun observeViewModel() {
@@ -92,7 +99,7 @@ class UserRegistrationFragment: Fragment() {
 
     private fun registerAndLogin() {
         firebaseAuth.createUserWithEmailAndPassword(
-            userRegistrationViewModel.username!!, userRegistrationViewModel.password!!)
+            userRegistrationViewModel.username, userRegistrationViewModel.password)
             .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
                 if (task.isSuccessful) {
                     requireActivity().clearBackStackAndAddFragment(fragmentClass = HeadlinesFragment::class.java)

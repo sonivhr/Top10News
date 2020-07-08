@@ -79,5 +79,3 @@ fun String?.isStrongPassword(): Pair<Boolean, ArrayList<String>?> {
     }
     return Pair(false, missingCharsArray)
 }
-
-fun String?.formatedAuthorName(): String? = this?.let { "By: $it" }

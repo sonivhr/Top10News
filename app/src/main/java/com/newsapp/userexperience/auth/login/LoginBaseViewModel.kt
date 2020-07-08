@@ -11,7 +11,7 @@ import com.newsapp.util.isValidPassword
 open class LoginBaseViewModel: ViewModel() {
     var username: String = ""
     val usernameErrorLiveData = MutableLiveData<Int?>()
-    var password: String? = ""
+    var password: String = ""
     val passwordErrorLiveData = MutableLiveData<String?>()
     val validCredentialEventLiveData = MutableLiveData<Event<Boolean>>()
 

@@ -1,9 +1,11 @@
 package com.newsapp.userexperience.auth.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -56,6 +58,13 @@ class LoginFragment : Fragment() {
         return dataBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+        edtPassword.onDoneButtonClick(inputMethodManager) { loginViewModel.validateUser() }
+    }
+
     fun changeTheme() {
         if (userPreferenceManager.getBoolean(PREF_IS_DARK_APP_THEME)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -99,7 +108,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login() {
-        firebaseAuth.signInWithEmailAndPassword(loginViewModel.username!!, loginViewModel.password!!)
+        firebaseAuth.signInWithEmailAndPassword(loginViewModel.username, loginViewModel.password)
             .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
                 if (task.isSuccessful) {
                     requireActivity().replaceFragmentWithoutBackStack(fragmentClass = HeadlinesFragment::class.java)
