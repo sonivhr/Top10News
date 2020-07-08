@@ -27,7 +27,7 @@ class HeadlinesFragment : Fragment(R.layout.layout_listing), OnArticleItemClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent().inject(this)
         super.onCreate(savedInstanceState)
-        headlinesViewModel = getViewModel(headlinesViewModelCreator)
+        headlinesViewModel = getFragmentViewModel(headlinesViewModelCreator)
     }
 
     override fun onResume() {

@@ -1,4 +1,4 @@
-package com.newsapp.userexperience.auth
+package com.newsapp.userexperience.auth.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,31 +8,14 @@ import com.newsapp.util.convertListToCSV
 import com.newsapp.util.isValidEmail
 import com.newsapp.util.isValidPassword
 
-class LoginViewModel: ViewModel() {
-
-    private val TAG = this.javaClass.simpleName
-    var username: String? = "myemail@gmail.com"
+open class LoginBaseViewModel: ViewModel() {
+    var username: String = ""
     val usernameErrorLiveData = MutableLiveData<Int?>()
-    var password: String? = "Password@2020"
+    var password: String? = ""
     val passwordErrorLiveData = MutableLiveData<String?>()
+    val validCredentialEventLiveData = MutableLiveData<Event<Boolean>>()
 
-    private val loginRepository = LoginRepository()
-
-    val loginResponseEventLiveData = MutableLiveData<Event<LoginResponse>>()
-
-    fun validateUser() {
-        if (isValidEmail() && isValidPassword()) {
-            loginResponseEventLiveData.value =
-                Event(
-                    loginRepository.validateUser(
-                        username!!,
-                        password!!
-                    )
-                )
-        }
-    }
-
-    private fun isValidEmail(): Boolean {
+    protected fun isValidEmail(): Boolean {
         if (!username.isValidEmail()) {
             usernameErrorLiveData.value = R.string.invalid_email
             return false
@@ -41,7 +24,7 @@ class LoginViewModel: ViewModel() {
         return true
     }
 
-    private fun isValidPassword(): Boolean {
+    protected fun isValidPassword(): Boolean {
         val passwordValidation = password?.isValidPassword()
         if (passwordValidation?.first == true) {
             passwordErrorLiveData.value = null

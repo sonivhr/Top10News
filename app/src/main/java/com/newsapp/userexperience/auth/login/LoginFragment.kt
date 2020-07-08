@@ -1,4 +1,4 @@
-package com.newsapp.userexperience.auth
+package com.newsapp.userexperience.auth.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,16 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
 import com.newsapp.R
 import com.newsapp.databinding.LayoutLoginBinding
 import com.newsapp.userexperience.headlines.HeadlinesFragment
 import com.newsapp.helperclasses.PREF_IS_DARK_APP_THEME
 import com.newsapp.helperclasses.UserPreferenceManager
+import com.newsapp.userexperience.auth.register.UserRegistrationFragment
 import com.newsapp.util.*
+import dagger.Lazy
 import kotlinx.android.synthetic.main.layout_login.*
 import javax.inject.Inject
 
@@ -23,17 +26,21 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var userPreferenceManager: UserPreferenceManager
-
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+    @Inject
+    lateinit var loginViewModelCreator: Lazy<LoginViewModel>
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent().inject(this)
         super.onCreate(savedInstanceState)
+        loginViewModel = getFragmentViewModel(loginViewModelCreator)
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).supportActionBar?.hide()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
     }
 
     override fun onCreateView(
@@ -43,8 +50,6 @@ class LoginFragment : Fragment() {
     ): View? {
         val dataBinding: LayoutLoginBinding = DataBindingUtil.inflate(inflater,
             R.layout.layout_login, container, false)
-
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         dataBinding.loginViewModel = this.loginViewModel
         dataBinding.loginFragment = this
         observeViewModel()
@@ -61,17 +66,16 @@ class LoginFragment : Fragment() {
         }
     }
 
+    fun navigateToUserRegistration() {
+        requireActivity().replaceFragmentWithBackStack(fragmentClass = UserRegistrationFragment::class.java,
+        tag = UserRegistrationFragment::class.java.simpleName)
+    }
+
     private fun observeViewModel() {
-        loginViewModel.loginResponseEventLiveData.observe(viewLifecycleOwner, Observer {
+        loginViewModel.validCredentialEventLiveData.observe(viewLifecycleOwner, Observer {
             loginResponseEvent ->
             loginResponseEvent.getContentIfNotHandled()?.let {
-                loginResponse ->
-                if (!loginResponse.token.isNullOrBlank()) {
-                    activity?.replaceFragmentWithBackStack(fragmentClass = HeadlinesFragment::class.java,
-                        tag = HeadlinesFragment::class.java.simpleName)
-                } else {
-                    requireActivity().showSnackBar(loginResponse.description!!)
-                }
+                login()
             }
         })
 
@@ -92,5 +96,16 @@ class LoginFragment : Fragment() {
                 tilPassword.error = passwordError
             }
         })
+    }
+
+    private fun login() {
+        firebaseAuth.signInWithEmailAndPassword(loginViewModel.username!!, loginViewModel.password!!)
+            .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    requireActivity().replaceFragmentWithoutBackStack(fragmentClass = HeadlinesFragment::class.java)
+                } else {
+                    requireActivity().showSnackBar(task.exception?.message!!)
+                }
+            })
     }
 }

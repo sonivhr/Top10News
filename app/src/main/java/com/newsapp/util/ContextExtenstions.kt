@@ -20,7 +20,7 @@ fun Fragment.appComponent(): ApplicationComponent = app().getAppComponent()
 /**
  * Like [Fragment.viewModelProvider] for Fragment that want a [ViewModel] scoped to the Fragment.
  */
-inline fun <reified T : ViewModel> Fragment.getViewModel(creator: Lazy<T>? = null): T {
+inline fun <reified T : ViewModel> Fragment.getFragmentViewModel(creator: Lazy<T>? = null): T {
     return if (creator == null)
         ViewModelProvider(this).get(T::class.java)
     else

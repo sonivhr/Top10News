@@ -3,7 +3,7 @@ package com.newsapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.newsapp.util.addFragment
-import com.newsapp.userexperience.auth.LoginFragment
+import com.newsapp.userexperience.auth.login.LoginFragment
 
 class MainActivity: AppCompatActivity() {
 

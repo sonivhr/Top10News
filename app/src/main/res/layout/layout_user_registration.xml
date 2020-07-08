@@ -5,17 +5,13 @@
 
     <data>
         <variable
-            name="loginViewModel"
-            type="com.newsapp.userexperience.auth.login.LoginViewModel" />
-        <variable
-            name="loginFragment"
-            type="com.newsapp.userexperience.auth.login.LoginFragment" />
+            name="userRegistrationViewModel"
+            type="com.newsapp.userexperience.auth.register.UserRegistrationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorScreenBackground">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRight"
@@ -32,21 +28,20 @@
             app:layout_constraintGuide_percent="0.03" />
 
         <TextView
-            android:id="@+id/txtChangeTheme"
+            android:id="@+id/tvUserRegistration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_theme"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textStyle="bold"
+            android:text="@string/user_registration"
+            app:layout_constraintBottom_toTopOf="@+id/tilEmail"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-            app:layout_constraintHorizontal_bias="0.500"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.98"
-            android:textColor="@android:color/holo_red_light"
-            android:onClick="@{() -> loginFragment.changeTheme()}"/>
+            app:layout_constraintVertical_bias="0.88" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUserName"
+            android:id="@+id/tilEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tilPassword"
@@ -56,13 +51,13 @@
             app:layout_constraintVertical_bias="0.92">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtUserName"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_username"
                 android:lines="1"
                 android:maxLines="1"
-                android:text="@={loginViewModel.username}" />
+                android:text="@={userRegistrationViewModel.username}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,43 +82,47 @@
                 android:inputType="textPassword"
                 android:lines="1"
                 android:maxLines="1"
-                android:text="@={loginViewModel.password}" />
+                android:text="@={userRegistrationViewModel.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnLogin"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirmPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            app:layout_constraintBottom_toBottomOf="@+id/txtChangeTheme"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
+            app:counterOverflowTextColor="@android:color/holo_red_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword"
-            app:layout_constraintVertical_bias="0.15"
-            android:onClick="@{() -> loginViewModel.validateUser()}"/>
+            app:passwordToggleEnabled="true"
+            app:layout_constraintVertical_bias="0.08">
 
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_confirm_password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="@={userRegistrationViewModel.confirmPassword}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnRegisterAndSignIn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/user_register"
-            android:textStyle="bold"
+            android:text="@string/register_and_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-            app:layout_constraintVertical_bias="0.10"
-            android:onClick="@{() -> loginFragment.navigateToUserRegistration()}"/>
-
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-            app:layout_constraintVertical_bias="0.10" />
+            app:layout_constraintTop_toBottomOf="@+id/tilConfirmPassword"
+            app:layout_constraintVertical_bias="0.08"
+            android:onClick="@{() -> userRegistrationViewModel.registerAndLogin()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

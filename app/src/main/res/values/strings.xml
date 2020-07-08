@@ -3,10 +3,13 @@
 
     <string name="change_theme">Change Theme</string>
     <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
     <string name="hint_username">Username</string>
     <string name="login">Login</string>
     <string name="user_register">New User? Register</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="register_and_sign_in">Regisger &amp; Login</string>
+    <string name="user_registration">User Registration</string>
 
     <string name="title_headlines">Headlines</string>
     <string name="title_story_detail">Story Detail</string>
@@ -17,6 +20,7 @@
 
     <!-- Messages -->
     <string name="invalid_email">Use valid email</string>
+    <string name="message_confirm_password">Password and confirm password are not same</string>
     <string name="message_error_loading_top_stories">Facing issue while loading top stories</string>
     <string name="message_error_loading_stories_details">Facing issue while loading stories details</string>
     <string name="message_loading_more_stories">Loading more stories&#8230;</string>

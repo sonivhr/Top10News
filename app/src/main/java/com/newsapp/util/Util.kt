@@ -34,6 +34,18 @@ fun String?.isValidEmail() =
     !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this!!).matches()
 
 fun String?.isValidPassword(): Pair<Boolean, ArrayList<String>?> {
+    val missingCharsArray = ArrayList<String>()
+    val password: String = this ?: ""
+
+    if (8 > password.length || password.length > 16) {
+        missingCharsArray.add("Password should be of 8-16 characters")
+        return Pair(false, missingCharsArray)
+    }
+
+    return Pair(true, null)
+}
+
+fun String?.isStrongPassword(): Pair<Boolean, ArrayList<String>?> {
 
     val missingCharsArray = ArrayList<String>()
     val password: String = this ?: ""
