@@ -55,8 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_username"
-                android:lines="1"
-                android:maxLines="1"
+                style="@style/edtEmail"
                 android:text="@={userRegistrationViewModel.username}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,9 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:lines="1"
-                android:maxLines="1"
+                style="@style/edtPassword"
                 android:text="@={userRegistrationViewModel.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,9 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_confirm_password"
-                android:inputType="textPassword"
-                android:lines="1"
-                android:maxLines="1"
+                style="@style/edtPassword"
                 android:text="@={userRegistrationViewModel.confirmPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 

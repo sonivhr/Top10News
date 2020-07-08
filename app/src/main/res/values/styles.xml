@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="edtEmail">
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text|textEmailAddress</item>
+    </style>
+
+    <style name="edtPassword">
+        <item name="android:maxLength">16</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+
 </resources>
