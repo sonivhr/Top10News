@@ -18,6 +18,7 @@ import com.newsapp.databinding.LayoutLoginBinding
 import com.newsapp.userexperience.headlines.HeadlinesFragment
 import com.newsapp.helperclasses.PREF_IS_DARK_APP_THEME
 import com.newsapp.helperclasses.UserPreferenceManager
+import com.newsapp.userexperience.auth.forgotpassword.ForgotPasswordFragment
 import com.newsapp.userexperience.auth.register.UserRegistrationFragment
 import com.newsapp.util.*
 import dagger.Lazy
@@ -80,6 +81,11 @@ class LoginFragment : Fragment() {
         tag = UserRegistrationFragment::class.java.simpleName)
     }
 
+    fun navigateToForgotPassword() {
+        requireActivity().replaceFragmentWithBackStack(fragmentClass = ForgotPasswordFragment::class.java,
+            tag = ForgotPasswordFragment::class.java.simpleName)
+    }
+
     private fun observeViewModel() {
         loginViewModel.validCredentialEventLiveData.observe(viewLifecycleOwner, Observer {
             loginResponseEvent ->
@@ -88,7 +94,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.usernameErrorLiveData.observe(viewLifecycleOwner, Observer {
+        loginViewModel.emailErrorLiveData.observe(viewLifecycleOwner, Observer {
             usernameError ->
             if (usernameError == null) {
                 tilUserName.error = null
@@ -108,13 +114,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun login() {
-        firebaseAuth.signInWithEmailAndPassword(loginViewModel.username, loginViewModel.password)
-            .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
+        firebaseAuth.signInWithEmailAndPassword(loginViewModel.email, loginViewModel.password)
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    requireActivity().replaceFragmentWithoutBackStack(fragmentClass = HeadlinesFragment::class.java)
+                    requireActivity().replaceFragmentWithoutBackStack(
+                        fragmentClass = HeadlinesFragment::class.java)
                 } else {
                     requireActivity().showSnackBar(task.exception?.message!!)
                 }
-            })
+            }
     }
 }

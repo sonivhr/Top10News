@@ -1,5 +1,6 @@
 package com.newsapp.userexperience.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +28,10 @@ class StoryDetailFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         inflater.inflate(R.layout.layout_detail, container, false)
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        wvDetail.settings.javaScriptEnabled = true
         wvDetail.loadUrl(arguments?.getString(ARGUMENT_URL))
         wvDetail.webChromeClient = MyWebChromeClient(progressBar)
         wvDetail.webViewClient = WebViewClient()

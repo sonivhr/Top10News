@@ -4,6 +4,7 @@ import android.content.Context
 import com.newsapp.MVVMApplication
 import com.newsapp.userexperience.auth.login.LoginFragment
 import com.newsapp.userexperience.auth.di.AuthModule
+import com.newsapp.userexperience.auth.external.ExternalLoginFragment
 import com.newsapp.userexperience.auth.forgotpassword.ForgotPasswordFragment
 import com.newsapp.userexperience.auth.register.UserRegistrationFragment
 import com.newsapp.userexperience.headlines.HeadlinesFragment
@@ -28,6 +29,8 @@ interface ApplicationComponent {
     fun inject(loginFragment: UserRegistrationFragment)
 
     fun inject(loginFragment: ForgotPasswordFragment)
+
+    fun inject(externalLoginFragment: ExternalLoginFragment)
 
     fun inject(headlinesFragment: HeadlinesFragment)
     // endregion

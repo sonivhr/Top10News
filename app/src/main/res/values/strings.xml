@@ -4,12 +4,13 @@
     <string name="change_theme">Change Theme</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
-    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
     <string name="login">Login</string>
     <string name="user_register">New User? Register</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="register_and_sign_in">Regisger &amp; Login</string>
     <string name="user_registration">User Registration</string>
+    <string name="reset_password">Reset Password</string>
 
     <string name="title_headlines">Headlines</string>
     <string name="title_story_detail">Story Detail</string>
@@ -27,4 +28,6 @@
     <string name="message_article_detail_unavailable">Article detail is not available</string>
     <string name="message_no_connectivity">Please check internet connectivity. Tap to retry.</string>
     <string name="message_issue_while_loading_data">Got an issue while loading data. Tap to retry.</string>
+
+    <string name="default_web_client">41490408806-qgbt5h9trqebmi2f99mgcuf5hr4rim25.apps.googleusercontent.com</string>
 </resources>

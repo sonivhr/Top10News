@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -56,12 +56,12 @@
             app:layout_constraintVertical_bias="0.92">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtUserName"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_username"
+                android:hint="@string/hint_email"
                 style="@style/edtEmail"
-                android:text="@={loginViewModel.username}" />
+                android:text="@={loginViewModel.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +120,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-            app:layout_constraintVertical_bias="0.10" />
+            app:layout_constraintVertical_bias="0.10"
+            android:onClick="@{() -> loginFragment.navigateToForgotPassword()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

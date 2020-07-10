@@ -69,7 +69,7 @@ class UserRegistrationFragment: Fragment() {
             }
         })
 
-        userRegistrationViewModel.usernameErrorLiveData.observe(viewLifecycleOwner, Observer {
+        userRegistrationViewModel.emailErrorLiveData.observe(viewLifecycleOwner, Observer {
                 usernameError ->
             if (usernameError == null) {
                 tilEmail.error = null
@@ -99,13 +99,13 @@ class UserRegistrationFragment: Fragment() {
 
     private fun registerAndLogin() {
         firebaseAuth.createUserWithEmailAndPassword(
-            userRegistrationViewModel.username, userRegistrationViewModel.password)
-            .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
+            userRegistrationViewModel.email, userRegistrationViewModel.password)
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     requireActivity().clearBackStackAndAddFragment(fragmentClass = HeadlinesFragment::class.java)
                 } else {
                     requireActivity().showSnackBar(task.exception?.message!!)
                 }
-            })
+            }
     }
 }
